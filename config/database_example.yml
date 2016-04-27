@@ -1,0 +1,22 @@
+efault: &default
+  adapter: postgresql
+  encoding: unicode
+  username:
+  password: ''
+  host: localhost
+  pool: 5
+
+development:
+  <<: *default
+  database: categorizer_development
+
+test:
+  <<: *default
+  database: categorizer_test
+
+production:
+  <<: *default
+  database: categorizer_production
+  username: categorizer
+  password: <%= ENV['QUESTIONNAIRE_DATABASE_PASSWORD'] %>
+
