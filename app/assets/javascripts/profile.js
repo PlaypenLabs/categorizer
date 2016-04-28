@@ -1,7 +1,7 @@
 'use strict';
 
-let targets_array = [];
-let index = 0;
+var targets_array = [];
+var index = 0;
 
 //Document ready function
 $(function () {
@@ -13,7 +13,7 @@ $(function () {
 
 
 function get_ticket_by_id() {
-  $.get(`/users/get_ticket_by_id/${targets_array[index]}`).then(function (response) {
+  $.get('/users/get_ticket_by_id/' + targets_array[index]).then(function (response) {
     if ($('div.row.ticket .col-lg-6.col-md-6.col-ticket').length > 0) {
       $('div.row.ticket .col-lg-6.col-md-6.col-ticket').replaceWith(response);
     }
