@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :users do
     collection do
       get :profile
+      get 'get_ticket_by_id/:id', action: :get_ticket_by_id
     end
   end
 

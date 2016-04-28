@@ -1,0 +1,18 @@
+<div class="col-lg-6 col-md-6 col-ticket">
+  <h3>Email:</h3>
+  <div class="zendesk-email-data">
+    <div>
+      <label>Received: </label> <span><%=@t['created_at']%></span>
+    </div>
+    <div>
+      <label>From:</label> <span><%=@t['via']['source']['from']['address']%></label></span>
+    </div>
+    <div>
+      <label>Subject:</label> <span><%=@t['subject']%></span>
+    </div>
+    <div>
+      <label>Text: </label>
+      <span><%=@t['description']%></span>
+    </div>
+  </div>
+</div>

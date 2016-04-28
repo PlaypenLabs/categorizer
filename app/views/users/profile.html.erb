@@ -6,27 +6,11 @@
   <p class="profile-name">You Zendesk email:
     <b><%= current_user.zendesk_email %></b>
   </p>
-  <div class="row">
-    <% @tickets.each do |t| %>
-      <div class="col-lg-6 col-md-6">
-        <h3>Email:</h3>
-        <div class="zendesk-email-data">
-          <div>
-            <label>Received: </label> <span><%=t['created_at']%></span>
-          </div>
-          <div>
-            <label>From:</label> <span><%=t['via']['source']['from']['address']%></label></span>
-          </div>
-          <div>
-            <label>Subject:</label> <span><%=t['subject']%></span>
-          </div>
-          <div>
-            <label>Text: </label>
-            <span><%=t['description']%></span>
-          </div>
-        </div>
-      </div>
-    <%end%>
+  <div class="row ticket">
+    <div class="col-lg-6 col-md-6 pull-right">
+      <button class="btn btn-success" onclick="prev()">Prev</button>
+      <button class="btn btn-success" onclick="next()">Next</button>
+    </div>
   </div>
 
 </div>
