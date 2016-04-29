@@ -5,10 +5,12 @@ var index = 0;
 
 //Document ready function
 $(function () {
-  $.get('/users/profile.json').then(function (response) {
-    targets_array = response;
-    get_ticket_by_id();
-  });
+  if (window.location.pathname === '/users/profile') {
+    $.get('/users/profile.json').then(function (response) {
+      targets_array = response;
+      get_ticket_by_id();
+    });
+  }
 });
 
 

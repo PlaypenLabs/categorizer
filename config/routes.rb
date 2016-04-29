@@ -10,6 +10,10 @@ Rails.application.routes.draw do
     collection do
       get :profile
       get 'get_ticket_by_id/:id', action: :get_ticket_by_id
+      resources :categories do
+      end
+      resources :actions, as: :action_messages do
+      end
     end
   end
 
