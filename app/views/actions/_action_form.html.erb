@@ -2,8 +2,11 @@
     <div class="form-group">
       <%= f.label 'Enter the action name and save' %>:
       <div class="row">
-        <div class="col-lg-8 col-md-8">
+        <div class="col-lg-4 col-md-4">
           <%= f.text_field :name , class:"form-control" %>
+        </div>
+        <div class="col-lg-4 col-md-4">
+          <%= f.text_field :recipient , class:"form-control" %>
         </div>
         <div class="col-lg-4 col-md-4">
           <%= f.submit class:"btn btn-success" %>

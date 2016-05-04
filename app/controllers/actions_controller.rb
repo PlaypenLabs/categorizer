@@ -31,7 +31,7 @@ class ActionsController < ApplicationController
   private
 
   def action_message_params_permit
-    params.require(:action_message).permit(:name)
+    params.require(:action_message).permit(:name, :recipient)
   end
 
 end
