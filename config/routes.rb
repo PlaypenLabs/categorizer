@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     collection do
       get :profile
       get 'get_ticket_by_id/:id', action: :get_ticket_by_id
+      post '/sent_email', action: :sent_email
       resources :categories do
       end
       resources :actions, as: :action_messages do

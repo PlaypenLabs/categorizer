@@ -27,4 +27,15 @@ class UsersController < ApplicationController
     render partial: 'users/ticket', layout: false
   end
 
+  def sent_email
+    ReportMailer.sent_report_category(permit_params_sent_email).deliver_now
+    redirect_to :profile_users
+  end
+
+  private
+
+  def permit_params_sent_email
+    params.require(:sent_email).permit(:category, :action, :email_text)
+  end
+
 end
