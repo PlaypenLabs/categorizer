@@ -12,10 +12,12 @@ class UsersController < ApplicationController
       tikets_ids.push(t['id'])
     end
 
+    @tikets_ids = tikets_ids
+
     respond_to do |format|
       format.html
       format.json {
-        render json: tikets_ids
+        render json: @tickets
       }
     end
   end
@@ -24,18 +26,29 @@ class UsersController < ApplicationController
     id = params[:id]
     ticket = JSON.parse(HTTP.basic_auth(user: current_user.zendesk_email, pass: current_user.zendesk_password).get("https://playpenlabs.zendesk.com/api/v2/tickets/#{id}.json"))['ticket']
     @t = ticket
+
+    p "**" *10
+    p @t
+    p "**" *10
+    p "**" *10
     render partial: 'users/ticket', layout: false
   end
 
-  def sent_email
-    ReportMailer.sent_report_category(permit_params_sent_email).deliver_now
+  def report
+    # ReportMailer.sent_report_category(permit_params_sent_email).deliver_now
+
+    p "**"*10
+    p permit_params_report
+    p "**"*10
+
+    Report.create(permit_params_report)
     redirect_to :profile_users
   end
 
   private
 
-  def permit_params_sent_email
-    params.require(:sent_email).permit(:category, :action, :email_text)
+  def permit_params_report
+    params.require(:report).permit(:category_id, :action_id, :comment)
   end
 
 end

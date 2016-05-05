@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <h3>Category</h3>
+      <% @reports.each do |report| %>
+        <div class="row">
+          <div class="col-lg-4 col-md-4">
+            <p><%= report.category.name %></p>
+          </div>
+          <div class="col-lg-4 col-md-4">
+            <p><%= report.category.reports_count %> emails</p>
+          </div>
+          <div class="col-lg-4 col-md-4">
+            <p><%= report.comment %></p>
+          </div>
+        </div>
+      <%end%>
+
+      <h3>Action</h3>
+      <% @reports.each do |report| %>
+        <div class="row">
+          <div class="col-lg-4 col-md-4">
+            <p><%= report.action_message.name %></p>
+          </div>
+          <div class="col-lg-4 col-md-4">
+            <p><%= report.action_message.reports_count %> emails</p>
+          </div>
+          <div class="col-lg-4 col-md-4">
+            <p><%= report.comment %></p>
+          </div>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
