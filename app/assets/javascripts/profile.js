@@ -16,13 +16,19 @@ $(function () {
 
 function get_ticket_by_id() {
   $.get('/users/get_ticket_by_id/' + targets_array[index]).then(function (response) {
-    if ($('div.row.ticket .col-lg-6.col-md-6.col-ticket').length > 0) {
-      $('div.row.ticket .col-lg-6.col-md-6.col-ticket').replaceWith(response);
+    if ($('div.row.ticket .user-ticket').length > 0) {
+      $('div.row.ticket .user-ticket').replaceWith(response);
+      $('.col-ticket .counter-email').replaceWith('<span>'+ (index+1) + '/</span><span>' + targets_array.length + '</span>')
     }
     else {
       $('div.row.ticket').append(response);
+      $('.col-ticket .counter-email').append('<span>'+ (index+1) + '/</span><span>' + targets_array.length + '</span>')
     }
   })
+}
+
+function getTickets() {
+  $.get('/users/get_tickets');
 }
 
 function next() {

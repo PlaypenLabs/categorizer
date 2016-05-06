@@ -1,18 +1,25 @@
-<div class="col-lg-6 col-md-6 col-ticket">
-  <h3>Email:</h3>
-  <div class="zendesk-ticket-data">
-    <div>
-      <label>Received: </label> <span><%=@t['created_at']%></span>
+<div class="user-ticket clearfix">
+  <div class="col-lg-6 col-md-6 col-ticket">
+    <div class="counter-email"></div>
+    <h3>Email:</h3>
+    <div class="zendesk-ticket-data">
+      <div>
+        <label>Received: </label> <span><%=@t['created_at']%></span>
+      </div>
+      <div>
+        <label>From:</label> <span><%=@t['from']%></label></span>
+      </div>
+      <div>
+        <label>Subject:</label> <span><%=@t['subject']%></span>
+      </div>
+      <div>
+        <label>Text: </label>
+        <span><%=@t['description']%></span>
+      </div>
     </div>
-    <div>
-      <label>From:</label> <span><%=@t['via']['source']['from']['address']%></label></span>
-    </div>
-    <div>
-      <label>Subject:</label> <span><%=@t['subject']%></span>
-    </div>
-    <div>
-      <label>Text: </label>
-      <span><%=@t['description']%></span>
-    </div>
+  </div>
+
+  <div class="col-lg-6 col-md-6 pull-right">
+    <%= render partial: 'users/form_categorize', locals: {t:@t} %>
   </div>
 </div>

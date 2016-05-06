@@ -28,6 +28,11 @@ class ActionsController < ApplicationController
     redirect_to action_messages_path
   end
 
+  def actions_report
+    @action = ActionMessage.find(params[:action_message_id])
+    @reports = @action.reports
+  end
+
   private
 
   def action_message_params_permit

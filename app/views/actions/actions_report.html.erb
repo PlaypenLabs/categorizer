@@ -1,0 +1,29 @@
+<div class="container">
+  <h2><%= @action.name %> - <%= @action.reports.count %> emails this week</h2>
+  <% @reports.each_with_index do |report, index| %>
+    <div class="row">
+      <div class="col-lg-6 col-md-6">
+        <h3>Email <%= index+1 %>:</h3>
+        <div class="zendesk-ticket-data">
+          <div>
+            <label>Received: </label> <span><%= report.ticket['created_at']%></span>
+          </div>
+          <div>
+            <label>From:</label> <span><%=report.ticket['from']%></label></span>
+          </div>
+          <div>
+            <label>Subject:</label> <span><%=report.ticket['subject']%></span>
+          </div>
+          <div>
+            <label>Text: </label>
+            <span><%=report.ticket['description']%></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6">
+        <h3>Comment:</h3>
+        <p><%= report.comment%> </p>
+      </div>
+    </div>
+  <%end%>
+</div>

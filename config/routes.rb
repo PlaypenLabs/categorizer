@@ -10,10 +10,11 @@ Rails.application.routes.draw do
     collection do
       get :profile
       get 'get_ticket_by_id/:id', action: :get_ticket_by_id
-      post '/report', action: :report
+      get 'get_tickets', action: :get_tickets
       resources :categories do
       end
       resources :actions, as: :action_messages do
+        get '/reports', action: :actions_report
       end
       resources :reports do
       end

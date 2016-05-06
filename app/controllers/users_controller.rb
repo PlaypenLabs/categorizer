@@ -5,11 +5,13 @@ class UsersController < ApplicationController
     # List Tickets
     # curl https://playpenlabs.zendesk.com/api/v2/tickets.json \
     # -v -u zendesk@playpenlabs.com:...
-    @tickets = JSON.parse(HTTP.basic_auth(user: current_user.zendesk_email, pass: current_user.zendesk_password).get('https://playpenlabs.zendesk.com/api/v2/tickets.json'))['tickets']
+    @tickets = Ticket.all #TODO change to last week
     tikets_ids = []
 
     @tickets.each do |t|
-      tikets_ids.push(t['id'])
+      if t.report.blank?
+        tikets_ids.push(t['id'])
+      end
     end
 
     @tikets_ids = tikets_ids
@@ -17,38 +19,30 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html
       format.json {
-        render json: @tickets
+        render json: @tikets_ids
       }
     end
   end
 
   def get_ticket_by_id
     id = params[:id]
-    ticket = JSON.parse(HTTP.basic_auth(user: current_user.zendesk_email, pass: current_user.zendesk_password).get("https://playpenlabs.zendesk.com/api/v2/tickets/#{id}.json"))['ticket']
+    ticket = Ticket.find_by(id:id)
     @t = ticket
-
-    p "**" *10
-    p @t
-    p "**" *10
-    p "**" *10
     render partial: 'users/ticket', layout: false
   end
 
-  def report
-    # ReportMailer.sent_report_category(permit_params_sent_email).deliver_now
-
-    p "**"*10
-    p permit_params_report
-    p "**"*10
-
-    Report.create(permit_params_report)
-    redirect_to :profile_users
-  end
-
-  private
-
-  def permit_params_report
-    params.require(:report).permit(:category_id, :action_id, :comment)
+  def get_tickets
+    @tickets = JSON.parse(HTTP.basic_auth(user: current_user.zendesk_email, pass: current_user.zendesk_password).get('https://playpenlabs.zendesk.com/api/v2/tickets.json'))['tickets']
+    @tickets.each do |t|
+      Ticket.find_or_create_by(id_zendesk:t['id']) do |ticket|
+        ticket.description = t['description']
+        ticket.subject = t['subject']
+        ticket.id_zendesk = t['id']
+        ticket.date = t['created_at']
+        ticket.from = t['via']['source']['from']['address']
+      end
+    end
+    render nothing: true
   end
 
 end

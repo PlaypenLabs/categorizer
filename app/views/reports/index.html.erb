@@ -10,9 +10,6 @@
           <div class="col-lg-4 col-md-4">
             <p><%= report.category.reports_count %> emails</p>
           </div>
-          <div class="col-lg-4 col-md-4">
-            <p><%= report.comment %></p>
-          </div>
         </div>
       <%end%>
 
@@ -23,10 +20,7 @@
             <p><%= report.action_message.name %></p>
           </div>
           <div class="col-lg-4 col-md-4">
-            <p><%= report.action_message.reports_count %> emails</p>
-          </div>
-          <div class="col-lg-4 col-md-4">
-            <p><%= report.comment %></p>
+            <%= link_to "#{report.action_message.reports_count} emails", action_message_reports_path(action_message_id:report.action_id), target: "_blank" %>
           </div>
         </div>
       <%end%>
