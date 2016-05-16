@@ -41,8 +41,8 @@ function next() {
 
 function prev() {
   index--;
-  if (index <= 0) {
-    index = targets_array.length-1;
+  if (index <= -1) {
+    index = targets_array.length - 1;
   }
   get_ticket_by_id();
 }

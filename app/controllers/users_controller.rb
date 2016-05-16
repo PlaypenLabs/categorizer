@@ -42,7 +42,7 @@ class UsersController < ApplicationController
         ticket.from = t['via']['source']['from']['address']
       end
     end
-    render nothing: true
+    redirect_to '/users/profile'
   end
 
 end
