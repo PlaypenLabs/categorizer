@@ -46,3 +46,12 @@ function prev() {
   }
   get_ticket_by_id();
 }
+
+function reciveEmail(type) {
+  if (type === 'categorize') {
+    $.post('/users/recive_category');
+  }
+  else if (type === 'report') {
+    $.post('/users/recive_report');
+  }
+}

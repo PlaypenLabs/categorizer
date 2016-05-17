@@ -13,6 +13,8 @@ Rails.application.routes.draw do
       get :profile
       get 'get_ticket_by_id/:id', action: :get_ticket_by_id
       get 'get_tickets', action: :get_tickets
+      post 'recive_category', action: :recive_category
+      post 'recive_report', action: :recive_report
       resources :categories do
       end
       resources :actions, as: :action_messages do

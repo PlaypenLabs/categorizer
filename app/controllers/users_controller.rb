@@ -45,4 +45,14 @@ class UsersController < ApplicationController
     redirect_to '/users/profile'
   end
 
+  def recive_category
+    ReportMailer.sent_weekly_email_categorize().deliver_now
+    render nothing: true
+  end
+
+  def recive_report
+    ReportMailer.sent_weekly_email_report().deliver_now
+    render nothing: true
+  end
+
 end
