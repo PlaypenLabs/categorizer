@@ -6,10 +6,10 @@ namespace :repots do
     h = date.strftime('%H')
     # if today Friday then send weekly report to REPORTER
     # else if today Monday then send weekly categorized ticket
-    if d=='5' and h=='9'
+    if d=='5'
       p 'Today Friday'
       ReportMailer.sent_weekly_email_report().deliver_now
-    elsif d == '1' and h=='9'
+    elsif d == '1'
       p 'Today  Monday'
       tickets = JSON.parse(HTTP.basic_auth(user: 'zendesk@playpenlabs.com', pass: 'devzd').get('https://playpenlabs.zendesk.com/api/v2/tickets.json'))['tickets']
       tickets.each do |t|
