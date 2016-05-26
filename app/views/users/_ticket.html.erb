@@ -4,7 +4,7 @@
     <h3>Email:</h3>
     <div class="zendesk-ticket-data">
       <div>
-        <label>Received: </label> <span><%=@t['created_at']%></span>
+        <label>Received: </label> <span><%=@t['created_at'].strftime('%e %^b %H:%M %Z')%></span>
       </div>
       <div>
         <label>From:</label> <span><%=@t['from']%></label></span>

@@ -5,7 +5,8 @@ class UsersController < ApplicationController
     # List Tickets
     # curl https://playpenlabs.zendesk.com/api/v2/tickets.json \
     # -v -u zendesk@playpenlabs.com:...
-    @tickets = Ticket.all #TODO change to last week
+    last_week = Date.today-7
+    @tickets = Ticket.where('date >= :last_week', last_week:last_week)
     tikets_ids = []
 
     @tickets.each do |t|
