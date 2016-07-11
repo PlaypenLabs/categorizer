@@ -4,11 +4,13 @@ namespace :repots do
     date = DateTime.now()
     d = date.strftime('%u')
     h = date.strftime('%H')
+    email = User.first.email
+
     # if today Friday then send weekly report to REPORTER
     # else if today Monday then send weekly categorized ticket
     if d=='5'
       p 'Today Friday'
-      ReportMailer.sent_weekly_email_report().deliver_now
+      ReportMailer.sent_weekly_email_report(email).deliver_now
     elsif d == '1'
       p 'Today  Monday'
       tickets = JSON.parse(HTTP.basic_auth(user: 'zendesk@playpenlabs.com', pass: 'devzd').get('https://playpenlabs.zendesk.com/api/v2/tickets.json'))['tickets']
@@ -21,7 +23,7 @@ namespace :repots do
           ticket.from = t['via']['source']['from']['address']
         end
       end
-      ReportMailer.sent_weekly_email_categorize().deliver_now
+      ReportMailer.sent_weekly_email_categorize(email).deliver_now
     else
       p '**' *10
       p '**' *10

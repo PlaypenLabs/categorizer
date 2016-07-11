@@ -20,9 +20,9 @@ Rails.application.routes.draw do
       resources :actions, as: :action_messages do
         get '/reports', action: :actions_report
       end
-      resources :reports do
-      end
     end
+  end
+  resources :reports do
   end
 
 end
