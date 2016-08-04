@@ -33,16 +33,7 @@ class UsersController < ApplicationController
   end
 
   def get_tickets
-    @tickets = JSON.parse(HTTP.basic_auth(user: current_user.zendesk_email, pass: current_user.zendesk_password).get('https://playpenlabs.zendesk.com/api/v2/tickets.json'))['tickets']
-    @tickets.each do |t|
-      Ticket.find_or_create_by(id_zendesk:t['id']) do |ticket|
-        ticket.description = t['description']
-        ticket.subject = t['subject']
-        ticket.id_zendesk = t['id']
-        ticket.date = t['created_at']
-        ticket.from = t['via']['source']['from']['address']
-      end
-    end
+    Ticket.add_tickets(current_user)
     redirect_to '/users/profile'
   end
 
