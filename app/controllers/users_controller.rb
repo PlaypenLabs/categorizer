@@ -2,25 +2,10 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def profile
-    # List Tickets
-    # curl https://playpenlabs.zendesk.com/api/v2/tickets.json \
-    # -v -u zendesk@playpenlabs.com:...
-    last_week = Date.today-7
-    @tickets = Ticket.where('date >= :last_week', last_week:last_week)
-    tikets_ids = []
-
-    @tickets.each do |t|
-      if t.report.blank?
-        tikets_ids.push(t['id'])
-      end
-    end
-
-    @tikets_ids = tikets_ids
-
     respond_to do |format|
       format.html
       format.json {
-        render json: @tikets_ids
+        render json: Ticket.retreive_tickets(current_user)
       }
     end
   end
