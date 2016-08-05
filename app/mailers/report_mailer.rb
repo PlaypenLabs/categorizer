@@ -7,12 +7,12 @@ class ReportMailer < ApplicationMailer
   end
 
   def sent_weekly_email_categorize(params)
-    @message = 'You support emails is ready to be categorized.'
+    @message = 'Your sample of support emails is ready to be categorized.'
     mail(to: "#{params}", subject: 'This weeks email are ready to be analyzed', message: @message)
   end
 
   def sent_weekly_email_report(params)
-    @message = 'You report on support email received it the last 7days is ready.'
+    @message = 'Your report on support emails received in the last 7 days is ready.'
     mail(to: "#{params}", subject: 'This week report on support emails is ready', message: @message)
   end
 
