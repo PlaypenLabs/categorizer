@@ -1,5 +1,6 @@
 class Ticket < ActiveRecord::Base
   has_one :report
+  scope :ordered, -> { order('created_at DESC') }
 
   def self.add_tickets(user)
     return false if user.zendesk_email.blank? && user.zendesk_password.blank?
@@ -17,6 +18,6 @@ class Ticket < ActiveRecord::Base
 
   def self.retreive_tickets(user)
     ticket_limits = user.first_login? ? 10 : 50
-    Ticket.where('date >= :last_week', last_week: Date.today - 7, report: nil).limit(ticket_limits).pluck(:id)
+    Ticket.where('date >= :last_week', last_week: Date.today - 7, report: nil).ordered.limit(ticket_limits).pluck(:id)
   end
 end
