@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users
-
   root 'home#index'
 
   resources :home do
@@ -25,4 +24,5 @@ Rails.application.routes.draw do
   resources :reports do
   end
 
+  get 'welcome' => 'home#welcome'
 end
