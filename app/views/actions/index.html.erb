@@ -17,7 +17,7 @@
               </div>
               <div class="col-lg-4 col-md-4">
                 <%= link_to 'Edit', edit_action_message_path(id:action.id), class:"btn btn-default" %>
-                <%= link_to 'Delete', action,  method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-default" %>
+                <%= link_to 'Delete', action,  method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default', disabled: can_delete_action?(action)  %>
               </div>
             </div>
           </div>
