@@ -1,6 +1,17 @@
 ActiveAdmin.register User do
   permit_params :email, :password, :password_confirmation, :zendesk_email, :zendesk_password
 
+  controller do
+    def update
+      if params[:user][:password].blank? && params[:user][:password_confirmation].blank? && params[:user][:zendesk_password].blank?
+        params[:user].delete('password')
+        params[:user].delete('password_confirmation')
+        params[:user].delete('zendesk_password')
+      end
+      super
+    end
+  end
+
   index do
     selectable_column
     id_column
