@@ -3,4 +3,6 @@ class Report < ActiveRecord::Base
   belongs_to :category, counter_cache: true
   belongs_to :user
   belongs_to :ticket
+
+  validates :category_id, presence: true
 end

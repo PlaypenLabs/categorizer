@@ -10,9 +10,9 @@ class ReportsController < ApplicationController
   end
 
   def create
-    report = Report.create(permit_params_report)
-    Ticket.find(permit_params_report[:ticket_id]).report = report
-    redirect_to :profile_users
+    @report = Report.new(permit_params_report)
+    Ticket.find(permit_params_report[:ticket_id]).report = @report if @report.save
+    redirect_to profile_users_path, notice: @report.valid? ? 'Report was successfully created.' : @report.errors.full_messages.join
   end
 
   def edit
