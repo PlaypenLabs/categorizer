@@ -3,7 +3,7 @@
       <%= f.label 'Enter the action name and recipient email and save' %>:
       <div class="row">
         <div class="col-lg-4 col-md-4">
-          <%= f.text_field :name, placeholder:'Action name', class:"form-control" %>
+          <%= f.text_field :name, placeholder: 'Action name', class: 'form-control', required: true %>
         </div>
         <div class="col-lg-4 col-md-4">
           <%= f.text_field :recipient, placeholder:'Recipient email', class:"form-control" %>
