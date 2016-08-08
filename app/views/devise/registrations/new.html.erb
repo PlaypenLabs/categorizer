@@ -25,12 +25,12 @@
 
           <div class="field">
             <%= f.label :zendesk_email %><br />
-            <%= f.email_field :zendesk_email, autofocus: "off", class:'form-control', placeholder:'Zendesk Email address' %>
+            <%= f.email_field :zendesk_email, autofocus: 'off', class:'form-control', placeholder: 'Zendesk Email address', required: true %>
           </div>
 
           <div class="field">
             <%= f.label :zendesk_password %><br />
-            <%= f.password_field :zendesk_password, autocomplete: "off", class:'form-control', placeholder:'Zendesk password' %>
+            <%= f.password_field :zendesk_password, autocomplete: 'off', class:'form-control', placeholder: 'Zendesk password', required: true %>
           </div>
 
           <div class="actions">
