@@ -1,5 +1,5 @@
 module CategoriesHelper
   def can_delete_category?(category)
-    category.reports.blank?
+    category.reports.present?
   end
 end
