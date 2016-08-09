@@ -13,7 +13,7 @@ class Ticket < ActiveRecord::Base
         ticket.date = t['created_at']
         ticket.from = t['via']['source']['from']['address']
       end
-    end
+    end if tickets.present?
   end
 
   def self.retreive_tickets(user)
