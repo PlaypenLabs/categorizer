@@ -1,5 +1,5 @@
 class ActionsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:actions_report]
   before_action :set_action, only: [:edit, :update, :destroy]
 
   def index
