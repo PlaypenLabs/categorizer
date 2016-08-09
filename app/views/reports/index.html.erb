@@ -26,4 +26,5 @@
       <%end%>
     </div>
   </div>
+  <%= link_to 'Send Report', receive_report_users_path, method: :post, class: 'btn btn-primary btn-md send-report-btn' if current_user.present? %>
 </div>
