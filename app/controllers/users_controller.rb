@@ -27,9 +27,9 @@ class UsersController < ApplicationController
     render nothing: true
   end
 
-  def recive_report
-    ReportMailer.sent_weekly_email_report().deliver_now
-    render nothing: true
+  def receive_report
+    ActionMessage.send_weekly_report
+    redirect_to reports_path, notice: 'Weekly reports are sent successfully'
   end
 
 end
