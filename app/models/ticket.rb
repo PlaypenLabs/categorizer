@@ -18,6 +18,6 @@ class Ticket < ActiveRecord::Base
 
   def self.retreive_tickets(user)
     ticket_limits = user.first_login? ? 10 : 50
-    Ticket.where('date >= :last_week', last_week: Date.today - 7, report: nil).ordered.limit(ticket_limits).pluck(:id)
+    Ticket.where('date >= :last_week', last_week: Date.today - 7).ordered.limit(ticket_limits).collect{ |t| t.id if t.report.blank? }.compact
   end
 end
