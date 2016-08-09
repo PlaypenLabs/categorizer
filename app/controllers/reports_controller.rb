@@ -1,8 +1,9 @@
 class ReportsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index]
 
   def index
-    @reports = Report.all
+    @categories = Report.retrieve_grouped_categories.keys
+    @actions = Report.retrieve_grouped_actions.keys
   end
 
   def new
@@ -11,8 +12,8 @@ class ReportsController < ApplicationController
 
   def create
     @report = Report.new(permit_params_report)
-    Ticket.find(permit_params_report[:ticket_id]).report = @report if @report.save
-    redirect_to profile_users_path, notice: @report.valid? ? 'Report was successfully created.' : @report.errors.full_messages.join
+    @report.save ? flash[:notice] = 'Report was successfully created.' : flash[:alert] = @report.errors.full_messages.join
+    redirect_to profile_users_path
   end
 
   def edit
