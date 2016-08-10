@@ -13,10 +13,11 @@
 
 ##Database initialization
 We using PostgreSQL database it should be installed.
-  1. Create a file `database.yml` in `config` directory and copy there a content from the file `database_example.yml`, also congire the access to your DB.
+  1. Create a file `database.yml` in `config` directory and copy there a content from the file `database_example.yml`, also confiqure the access to your DB.
 
 ##Database creation
   1. Create DB `rake db:create`
   2. Run Migration `rake db:migrate`
+  3. Run `rake db:seed` for create Admin and User
 
 

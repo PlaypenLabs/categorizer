@@ -1,0 +1,31 @@
+<div class="container">
+  <div><%= get_initial_report_text %></div>
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <h3>Category</h3>
+      <% @categories.each do |category| %>
+        <div class="row">
+          <div class="col-lg-4 col-md-4">
+            <p><%= category.name %></p>
+          </div>
+          <div class="col-lg-4 col-md-4">
+            <p><%= category.reports_count %> emails</p>
+          </div>
+        </div>
+      <%end%>
+
+      <h3>Action</h3>
+      <% @actions.each do |action| %>
+        <div class="row">
+          <div class="col-lg-4 col-md-4">
+            <p><%= action.name %></p>
+          </div>
+          <div class="col-lg-4 col-md-4">
+            <%= link_to "#{action.reports_count} emails", action_message_reports_path(action_message_id: action.id), target: '_blank' %>
+          </div>
+        </div>
+      <%end%>
+    </div>
+  </div>
+  <%= link_to 'Send Report', receive_report_users_path, method: :post, class: 'btn btn-primary btn-md send-report-btn' if current_user.present? %>
+</div>

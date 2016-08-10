@@ -1,0 +1,10 @@
+<% flash.each do |name, msg| %>
+  <div class='row'>
+    <div class='col-sm-12 col-md-12 margin-under-header'>
+      <div class ='alert <%= flash_class(name) %> alert-dismissible' role='alert'>
+        <button type='button' class='close' data-dismiss='alert'>&times;</button>
+        <%= content_tag :div, msg %>
+      </div>
+    </div>
+  </div>
+<% end %>

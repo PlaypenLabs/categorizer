@@ -1,0 +1,13 @@
+<%= form_for @category do |f|%>
+    <div class="form-group">
+      <%= f.label 'Enter the category name and save' %>:
+      <div class="row">
+        <div class="col-lg-8 col-md-8">
+          <%= f.text_field :name, placeholder: 'Category name', class: 'form-control', required: true %>
+        </div>
+        <div class="col-lg-4 col-md-4">
+          <%= f.submit class:"btn btn-success" %>
+        </div>
+      </div>
+    </div>
+<%end%>

@@ -1,0 +1,54 @@
+<%= form_for(:report, :html=>{class:'form-group'}, url: '/reports') do |f| %>
+    <%= f.hidden_field :ticket_id, :value => @t['id'] %>
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="row">
+          <% current_user.categories.each do |category| %>
+              <div class="col-lg-6 col-md-6">
+                <div class="message-category">
+                  <label>
+                    <%= f.radio_button("category_id",category.id, required: true) %>
+                    <%= category.name %>
+                  </label>
+                </div>
+              </div>
+          <%end%>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-6 pull-right">
+            <%=link_to 'Change categories?', :categories, class: 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 margin-top">
+        <div class="row">
+          <% current_user.action_messages.each do |action| %>
+              <div class="col-lg-6 col-md-6">
+                <div class="message-action">
+                  <label>
+                    <%= f.radio_button('action_id', action.id) %>
+                    <%= action.name %>
+                  </label>
+                </div>
+              </div>
+          <%end%>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-6 pull-right">
+            <%=link_to 'Change Actions?', :action_messages, class: 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="margin-top">
+        <%= f.text_area :comment, placeholder: 'Comment text', class: 'form-control' %>
+      </div>
+    </div>
+    <div class="row">
+      <%= f.submit 'Send Report', class:'btn btn-default pull-right margin-top' %>
+    </div>
+<%end%>
