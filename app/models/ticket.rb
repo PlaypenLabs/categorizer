@@ -4,7 +4,16 @@ class Ticket < ActiveRecord::Base
 
   def self.add_tickets(user)
     return false if user.zendesk_email.blank? && user.zendesk_password.blank?
-    tickets =  JSON.parse(HTTP.basic_auth(user: user.zendesk_email, pass: user.zendesk_password).get('https://playpenlabs.zendesk.com/api/v2/tickets.json'))['tickets']
+    url = 'https://playpenlabs.zendesk.com/api/v2/tickets.json'
+
+    tickets = Array.new()
+
+    while url
+      zendesk_tickets = JSON.parse(HTTP.basic_auth(user: user.zendesk_email, pass: user.zendesk_password).get(url))
+      tickets += zendesk_tickets['tickets'] if zendesk_tickets['tickets'].present?
+      url = zendesk_tickets['next_page']
+    end
+
     tickets.each do |t|
       Ticket.find_or_create_by(id_zendesk:t['id']) do |ticket|
         ticket.description = t['description']
