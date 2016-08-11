@@ -2,5 +2,5 @@
   <p>
     <%= @message %>
   </p>
-  <%= link_to 'See it here', reports_url(host: ENV['HOST']) %>
+  <%= link_to 'See it here', reports_url(host: ENV['HOST'], access_token: @access_token) %>
 </div>

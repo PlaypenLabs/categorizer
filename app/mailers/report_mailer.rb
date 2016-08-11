@@ -11,8 +11,9 @@ class ReportMailer < ApplicationMailer
     mail(to: "#{params}", subject: 'This weeks email are ready to be analyzed', message: @message)
   end
 
-  def sent_weekly_email_report(params)
+  def sent_weekly_email_report(params, access_token)
     @message = 'Your report on support emails received in the last 7 days is ready.'
+    @access_token = access_token
     mail(to: "#{params}", subject: 'This week report on support emails is ready', message: @message)
   end
 
