@@ -1,5 +1,7 @@
 class Ticket < ActiveRecord::Base
   has_one :report
+  belongs_to :organization
+
   scope :ordered, -> { order('created_at DESC') }
 
   def self.add_tickets(user)
