@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :action_messages
   has_many :reports
 
+  belongs_to :organization
+
   validates :zendesk_email, :zendesk_password, presence: true
   def first_login?
     self.sign_in_count <= 1
