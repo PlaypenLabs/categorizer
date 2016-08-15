@@ -6,7 +6,8 @@ class Ticket < ActiveRecord::Base
 
   def self.add_tickets(user)
     return false if user.zendesk_email.blank? && user.zendesk_password.blank?
-    url = 'https://playpenlabs.zendesk.com/api/v2/tickets.json'
+    organization = user.organization
+    url = "https://#{organization.name}/api/v2/tickets.json"
 
     tickets = Array.new()
 
@@ -17,12 +18,13 @@ class Ticket < ActiveRecord::Base
     end
 
     tickets.each do |t|
-      Ticket.find_or_create_by(id_zendesk:t['id']) do |ticket|
+      Ticket.find_or_create_by(id_zendesk: t['id'], organization_id: organization.id) do |ticket|
         ticket.description = t['description']
         ticket.subject = t['subject']
         ticket.id_zendesk = t['id']
         ticket.date = t['created_at']
         ticket.from = t['via']['source']['from']['address']
+        ticket.organization_id = organization.id
       end
     end if tickets.present?
   end
