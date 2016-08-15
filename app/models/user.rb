@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   belongs_to :organization
 
   validates :zendesk_email, :zendesk_password, presence: true
+  validates :organization_id, presence: { message: ' sub domain can not be blank' }
+
   def first_login?
     self.sign_in_count <= 1
   end
