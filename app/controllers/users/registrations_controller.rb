@@ -6,7 +6,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         flash[:alert] = 'Invalid zendesk credentials.'
         return render :new
       end
-      organization = Organization.find_or_create_by(name: params[:organization_name]) if params[:organization_name].present?
+      organization = Organization.find_or_create_by(name: params[:organization_name].strip + '.zendesk.com') if params[:organization_name].present?
       resource.organization = organization
       resource.save
     end
