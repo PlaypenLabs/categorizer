@@ -6,4 +6,5 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
-User.create!(email: 'admin@categorizer.com', password: 'categorizer', password_confirmation: 'categorizer', zendesk_email: 'zendesk@playpenlabs.com', zendesk_password: 'devzd')
+organization = Organization.find_or_create_by!(name: 'playpenlabs.zendesk.com')
+User.create!(email: 'admin@categorizer.com', password: 'categorizer', password_confirmation: 'categorizer', zendesk_email: 'zendesk@playpenlabs.com', zendesk_password: 'devzd', organization: organization)

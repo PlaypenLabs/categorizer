@@ -4,7 +4,7 @@ class HomeController < ApplicationController
   end
 
   def welcome
-    redirect_to(root_url) unless current_user.first_login?
+    current_user.first_login? ? Ticket.add_tickets(current_user) : redirect_to(root_url)
   end
 
 end

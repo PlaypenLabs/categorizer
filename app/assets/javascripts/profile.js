@@ -8,7 +8,9 @@ $(function () {
   if (window.location.pathname === '/users/profile') {
     $.get('/users/profile.json').then(function (response) {
       targets_array = response;
-      get_ticket_by_id();
+      if(targets_array.length > 0){
+        get_ticket_by_id();
+      }
     });
   }
 });
