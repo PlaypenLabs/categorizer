@@ -1,4 +1,5 @@
 class ActionMessage < ActiveRecord::Base
+  DEFAULT_ACTIONS = ['Product improvement', 'Help content improvement', 'Support process improvement']
   belongs_to :user
   has_many :reports, foreign_key: :action_id
   has_many :tickets
