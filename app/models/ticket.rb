@@ -1,6 +1,9 @@
 class Ticket < ActiveRecord::Base
-  has_one :report
   belongs_to :organization
+  has_one :report
+  has_one :user, through: :report
+
+  validates :organization_id, presence: true
 
   scope :ordered, -> { order('created_at DESC') }
 
