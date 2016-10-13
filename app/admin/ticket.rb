@@ -1,17 +1,23 @@
 ActiveAdmin.register Ticket do
+  permit_params :subject, :description, :date, :from, :id_zendesk, :organization_id, :replied
 
-# See permitted parameters documentation:
-# https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-#
-# permit_params :list, :of, :attributes, :on, :model
-#
-# or
-#
-# permit_params do
-#   permitted = [:permitted, :attributes]
-#   permitted << :other if params[:action] == 'create' && current_user.admin?
-#   permitted
-# end
+  index do
+    selectable_column
+    id_column
+    column :subject
+    column :description
+    column :from
+    column :replied
+    column :user do |ticket|
+      user = ticket.try(:user)
+      link_to user.email, admin_user_path(user) if user.present?
+    end
+    actions
+  end
 
-
+  filter :subject
+  filter :description
+  filter :from
+  filter :created_at
+  filter :user, as: :select, collection: User.all.collect{ |user| [user.email, user.id] }
 end
