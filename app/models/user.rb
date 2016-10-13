@@ -12,7 +12,14 @@ class User < ActiveRecord::Base
   validates :zendesk_email, :zendesk_password, presence: true
   validates :organization_id, presence: { message: ' sub domain can not be blank' }
 
+  after_create :add_defaults
+
   def first_login?
     self.sign_in_count <= 1
+  end
+
+  def add_defaults
+    Category::DEFAULT_CATEGORIES.each{ |category| self.categories.create(name: category) }
+    ActionMessage::DEFAULT_ACTIONS.each{ |action_message| self.action_messages.create(name: action_message) }
   end
 end
