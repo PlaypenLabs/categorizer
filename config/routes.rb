@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   resources :users do
     collection do
-      get :profile
+      get :profile, path: '/categorize'
       get 'get_ticket_by_id/:id', action: :get_ticket_by_id
       get 'get_tickets', action: :get_tickets
       post 'recive_category', action: :recive_category

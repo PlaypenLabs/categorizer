@@ -5,8 +5,8 @@ var index = 0;
 
 //Document ready function
 $(function () {
-  if (window.location.pathname === '/users/profile') {
-    $.get('/users/profile.json').then(function (response) {
+  if (window.location.pathname === '/users/categorize') {
+    $.get('/users/categorize.json').then(function (response) {
       targets_array = response;
       if(targets_array.length > 0){
         get_ticket_by_id();

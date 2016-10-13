@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 
   def get_tickets
     Ticket.add_tickets(current_user)
-    redirect_to '/users/profile'
+    redirect_to profile_users_path
   end
 
   def recive_category
