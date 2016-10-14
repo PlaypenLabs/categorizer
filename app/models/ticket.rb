@@ -35,7 +35,7 @@ class Ticket < ActiveRecord::Base
 
   def self.retreive_tickets(user)
     ticket_limits = user.first_login? ? (10 - user.reports.count) : 50
-    user.organization.tickets.where('date >= :last_week', last_week: Date.today - 7).ordered.collect{ |t| t.id if t.report.blank? }.compact[0..ticket_limits - 1]
+    user.organization.uncategorized_tickets[0..ticket_limits - 1]
   end
 
   def self.last_uncategorized_tickets
