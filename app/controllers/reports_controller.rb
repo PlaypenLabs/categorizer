@@ -15,7 +15,7 @@ class ReportsController < ApplicationController
     @report = Report.new(permit_params_report)
     @report.user = current_user
     @report.save ? flash[:notice] = 'Report was successfully created.' : flash[:alert] = @report.errors.full_messages.join
-    redirect_to profile_users_path
+    redirect_to redirect_path
   end
 
   def edit
@@ -40,6 +40,10 @@ class ReportsController < ApplicationController
     return @user = current_user if current_user.present?
     @user = ActionMessage.where(access_token: params[:access_token]).first.try(:user)
     redirect_to root_url, alert: 'Do not have enough rights to view reports' if @user.blank?
+  end
+
+  def redirect_path
+    current_user.organization.uncategorized_tickets.present? ? profile_users_path : reports_path
   end
 
 end
