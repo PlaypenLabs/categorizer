@@ -22,4 +22,8 @@ class User < ActiveRecord::Base
     Category::DEFAULT_CATEGORIES.each{ |category| self.categories.create(name: category) }
     ActionMessage::DEFAULT_ACTIONS.each{ |action_message| self.action_messages.create(name: action_message) }
   end
+
+  def set_email_reports
+    self.reports.update_all(is_emailed: true)
+  end
 end
