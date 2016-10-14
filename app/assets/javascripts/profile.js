@@ -25,6 +25,9 @@ function get_ticket_by_id() {
       $('div.row.ticket').append(response);
     }
     $('.col-ticket .counter-email').replaceWith(['<span>', 'Email ', (index+1), '/</span><span>', targets_array.length, '</span>'].join(''))
+    if(targets_array.length == 1){
+      $(".user-ticket input[type='submit']").val('Show Reports');
+    }
   })
 }
 
