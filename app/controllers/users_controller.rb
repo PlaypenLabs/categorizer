@@ -2,6 +2,9 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def profile
+    @unsent_emails = current_user.reports.unsent_emails
+    @uncategorized_tickets = current_user.organization.uncategorized_tickets
+    flash[:notice] = 'All tickets are categorized but all reports are not sent yet.' if @unsent_emails.present? && @uncategorized_tickets.blank?
     respond_to do |format|
       format.html
       format.json {
