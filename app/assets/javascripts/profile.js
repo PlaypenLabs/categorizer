@@ -35,22 +35,6 @@ function getTickets() {
   $.get('/users/get_tickets');
 }
 
-function next() {
-  index++;
-  if (index >= targets_array.length) {
-    index = 0;
-  }
-  get_ticket_by_id();
-}
-
-function prev() {
-  index--;
-  if (index <= -1) {
-    index = targets_array.length - 1;
-  }
-  get_ticket_by_id();
-}
-
 function reciveEmail(type) {
   if (type === 'categorize') {
     $.post('/users/recive_category');
