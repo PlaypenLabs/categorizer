@@ -31,10 +31,6 @@ function get_ticket_by_id() {
   })
 }
 
-function getTickets() {
-  $.get('/users/get_tickets');
-}
-
 function reciveEmail(type) {
   if (type === 'categorize') {
     $.post('/users/recive_category');
