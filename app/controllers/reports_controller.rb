@@ -1,6 +1,7 @@
 class ReportsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :find_user, only: [:index]
+  before_action :verify_categorization, only: [:index]
 
   def index
     @categories = Report.retrieve_grouped_categories(@user).keys
@@ -44,6 +45,10 @@ class ReportsController < ApplicationController
 
   def redirect_path
     current_user.organization.uncategorized_tickets.present? ? profile_users_path : reports_path
+  end
+
+  def verify_categorization
+    redirect_to profile_users_path, alert: 'Categorize all tickets in order to procced' if current_user.organization.uncategorized_tickets.present?
   end
 
 end
