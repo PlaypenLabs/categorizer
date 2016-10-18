@@ -41,4 +41,12 @@ class Ticket < ActiveRecord::Base
   def self.last_uncategorized_tickets
     self.last_tickets.includes(:report).ordered.collect{ |t| t.id if t.report.blank? }.compact
   end
+
+  ransacker :categorize_by_users,
+    formatter: proc { |selected_id|
+      user = User.find_by_id(selected_id)
+      results = Ticket.where(organization_id: user.organization_id).pluck(:id) if user.present?
+    }, splat_params: true do |parent|
+    parent.table[:id]
+  end
 end

@@ -9,7 +9,7 @@ ActiveAdmin.register Ticket do
     column :from
     column :replied
     column :user do |ticket|
-      user = ticket.try(:user)
+      user = ticket.organization.users.first
       link_to user.email, admin_user_path(user) if user.present?
     end
     actions
@@ -19,5 +19,5 @@ ActiveAdmin.register Ticket do
   filter :description
   filter :from
   filter :created_at
-  filter :user, as: :select, collection: User.all.collect{ |user| [user.email, user.id] }
+  filter :categorize_by_users_in, label: 'Having user', as: :select, collection: User.all.collect{ |user| [user.email, user.id] }
 end
