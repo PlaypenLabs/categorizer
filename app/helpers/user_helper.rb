@@ -11,5 +11,9 @@ module UserHelper
   def show_report_btn?(unsent_emails, uncategorized_tickets)
     unsent_emails.present? && uncategorized_tickets.blank?
   end
+
+  def first_report_confirmation_text
+    'first set of' if current_user.first_login?
+  end
 end
 

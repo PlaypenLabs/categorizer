@@ -33,7 +33,9 @@ class UsersController < ApplicationController
   def receive_report
     ActionMessage.send_weekly_report(current_user)
     current_user.set_email_reports
-    redirect_to reports_path, notice: 'Weekly reports are sent successfully'
+    redirect_to report_confirmation_users_path, notice: 'Weekly reports are sent successfully'
   end
 
+  def report_confirmation
+  end
 end

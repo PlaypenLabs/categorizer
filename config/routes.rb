@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       get 'get_tickets', action: :get_tickets
       post 'recive_category', action: :recive_category
       post 'receive_report', action: :receive_report
+      get 'report_confirmation', action: :report_confirmation
       resources :categories do
       end
       resources :actions, as: :action_messages do
