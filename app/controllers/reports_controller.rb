@@ -48,7 +48,7 @@ class ReportsController < ApplicationController
   end
 
   def verify_categorization
-    redirect_to profile_users_path, alert: 'Categorize all tickets in order to procced' if current_user.organization.uncategorized_tickets.present?
+    redirect_to profile_users_path, alert: 'Categorize all tickets in order to procced' if current_user.present? && current_user.organization.uncategorized_tickets.present?
   end
 
 end
