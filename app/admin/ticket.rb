@@ -19,5 +19,5 @@ ActiveAdmin.register Ticket do
   filter :description
   filter :from
   filter :created_at
-  filter :categorize_by_users_in, label: 'Having user', as: :select, collection: User.all.collect{ |user| [user.email, user.id] }
+  filter :categorize_by_users_in, label: 'Having user', as: :select, collection: proc { User.all.collect{ |user| [user.email, user.id] } }
 end
