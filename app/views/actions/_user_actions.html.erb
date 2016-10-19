@@ -1,0 +1,23 @@
+<% actions.each do |action| %>
+  <div class='category'>
+    <div class='row'>
+      <div class='col-lg-4 col-md-4'>
+        <%= action.name %>
+      </div>
+      <div class='col-lg-4 col-md-4'>
+        <% if action.recipient.present? %>
+          <%= action.recipient %>
+        <% else %>
+          <p>No email set</p>
+        <% end %>
+      </div>
+      <div class='col-lg-4 col-md-4'>
+        <%= link_to 'Edit', edit_action_message_path(id: action.id), class: 'btn btn-default' %>
+        <%= link_to 'Delete', action, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default', disabled: can_delete_action?(action)   %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<div class='row'>
+  <p><%= link_to 'Add New Action', :new_action_message, class: 'btn btn-default' %></p>
+</div>
