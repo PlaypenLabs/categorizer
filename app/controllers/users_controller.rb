@@ -38,4 +38,10 @@ class UsersController < ApplicationController
 
   def report_confirmation
   end
+
+  def welcome_categorization
+    session[:welcome_categorization] = true
+    @categories = current_user.categories
+    @actions = current_user.action_messages
+  end
 end

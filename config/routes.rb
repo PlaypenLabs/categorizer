@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       post 'recive_category', action: :recive_category
       post 'receive_report', action: :receive_report
       get 'report_confirmation', action: :report_confirmation
+      get 'welcome_categorization', action: :welcome_categorization
       resources :categories do
       end
       resources :actions, as: :action_messages do
