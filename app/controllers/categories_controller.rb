@@ -3,7 +3,8 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: [:edit, :update, :destroy]
 
   def index
-    @c = current_user.categories
+    session[:welcome_categorization] = false
+    @categories = current_user.categories
   end
 
   def new
@@ -13,7 +14,7 @@ class CategoriesController < ApplicationController
   def create
     @category = current_user.categories.new(category_params_permit)
     if @category.save
-      redirect_to categories_path, notice: 'Category was successfully created.'
+      redirect_to redirect_path, notice: 'Category was successfully created.'
     else
       flash[:error] = @category.errors.full_messages.join
       render :new
@@ -25,7 +26,7 @@ class CategoriesController < ApplicationController
 
   def update
     if @category.update(category_params_permit)
-      redirect_to categories_path, notice: 'Category was successfully updated.'
+      redirect_to redirect_path, notice: 'Category was successfully updated.'
     else
       flash[:error] = @category.errors.full_messages.join
       render :edit
@@ -39,7 +40,7 @@ class CategoriesController < ApplicationController
       flash[:notice] = 'Category was successfully deleted.'
       @category.destroy
     end
-    redirect_to categories_path
+    redirect_to redirect_path
   end
 
   private
@@ -50,6 +51,10 @@ class CategoriesController < ApplicationController
 
   def set_category
     @category = Category.find(params[:id])
+  end
+
+  def redirect_path
+    session[:welcome_categorization] == true ? welcome_categorization_users_path : categories_path
   end
 
 end
