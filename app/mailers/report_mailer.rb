@@ -1,4 +1,5 @@
 class ReportMailer < ApplicationMailer
+  helper MailerHelper
   default from:'categorizer@playpenlabs.com'
 
   def sent_report_category(params)
