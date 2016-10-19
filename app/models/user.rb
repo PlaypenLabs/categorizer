@@ -26,4 +26,8 @@ class User < ActiveRecord::Base
   def set_email_reports
     self.reports.update_all(is_emailed: true)
   end
+
+  def first_week?
+    self.created_at >= 1.week.ago
+  end
 end
