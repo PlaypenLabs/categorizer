@@ -6,9 +6,10 @@ class ReportMailer < ApplicationMailer
     mail(to: "#{params['action']}", subject: "#{params['category']}", message: "#{params['email_text']}")
   end
 
-  def sent_weekly_email_categorize(params)
-    @message = 'Your sample of support emails is ready to be categorized.'
-    mail(to: "#{params}", subject: 'This weeks email are ready to be analyzed', message: @message)
+  def sent_weekly_email_categorize(user)
+    @user = user
+    subject = @user.first_week? ? 'Your first batch of conversations is ready to be analyzed' : 'This weeks email are ready to be analyzed'
+    mail(to: "#{user.email}", subject: subject)
   end
 
   def sent_weekly_email_report(params, access_token)
