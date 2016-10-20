@@ -49,4 +49,8 @@ class Ticket < ActiveRecord::Base
     }, splat_params: true do |parent|
     parent.table[:id]
   end
+
+  def self.latest_ticket_ids
+    last_tickets.pluck(:id)
+  end
 end

@@ -9,6 +9,7 @@ class Report < ActiveRecord::Base
   scope :with_categories, -> { where.not(category_id: nil) }
   scope :with_actions, -> { where.not(action_id: nil) }
   scope :unsent_emails, -> { where.not(is_emailed: true) }
+  scope :latest, -> { where(ticket_id: Ticket.latest_ticket_ids) }
 
 
   def self.retrieve_grouped_categories(user)
