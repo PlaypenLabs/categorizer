@@ -9,7 +9,7 @@ class ReportMailer < ApplicationMailer
 
   def sent_weekly_email_categorize(user)
     @user = user
-    subject = @user.first_week? ? 'Your first batch of conversations is ready to be analyzed' : 'This weeks email are ready to be analyzed'
+    subject = @user.first_week? ? 'Userchamp - Your first batch of conversations is ready to be analyzed' : 'This weeks email are ready to be analyzed'
     mail(to: "#{user.email}", subject: subject)
   end
 
