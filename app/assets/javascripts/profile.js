@@ -5,7 +5,7 @@ var index = 0;
 
 //Document ready function
 $(function () {
-  if (window.location.pathname === '/users/categorize') {
+  if (['/users/categorize', '/'].indexOf(window.location.pathname) >= 0) {
     $.get('/users/categorize.json').then(function (response) {
       targets_array = response;
       if(targets_array.length > 0){
