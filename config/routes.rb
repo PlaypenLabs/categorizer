@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
+  root 'users#profile'
+
   resources :users do
     collection do
       get :profile, path: '/categorize'
