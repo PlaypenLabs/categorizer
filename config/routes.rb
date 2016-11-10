@@ -6,11 +6,6 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  root 'home#index'
-
-  resources :home do
-  end
-
   resources :users do
     collection do
       get :profile, path: '/categorize'
@@ -29,6 +24,4 @@ Rails.application.routes.draw do
   end
   resources :reports do
   end
-
-  get 'welcome' => 'home#welcome'
 end
