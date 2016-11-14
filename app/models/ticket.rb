@@ -22,6 +22,7 @@ class Ticket < ActiveRecord::Base
     end
 
     tickets.each do |t|
+      next if Date.parse(t['created_at']) < (Date.today - 7)
       Ticket.find_or_create_by(id_zendesk: t['id'], organization_id: organization.id) do |ticket|
         ticket.description = t['description']
         ticket.subject = t['subject']
