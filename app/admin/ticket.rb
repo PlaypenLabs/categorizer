@@ -12,6 +12,7 @@ ActiveAdmin.register Ticket do
       user = ticket.organization.users.first
       link_to user.email, admin_user_path(user) if user.present?
     end
+    column :created_at
     actions
   end
 
