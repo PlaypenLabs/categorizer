@@ -8,7 +8,7 @@ namespace :repots do
     #User.all.each do |user|
     user = User.find(53)
     Ticket.add_tickets(user)
-    ReportMailer.sent_weekly_email_categorize(user.email).deliver_now
+    ReportMailer.sent_weekly_email_categorize(user).deliver_now
     #end
   end
 end
