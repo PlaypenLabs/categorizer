@@ -3,12 +3,11 @@ namespace :repots do
   task categorize_report: :environment do
     date = DateTime.now()
     day = date.strftime('%u')
-    #return unless day == '1'
+    return unless day == '1'
 
-    #User.all.each do |user|
-    user = User.find(53)
-    Ticket.add_tickets(user)
-    ReportMailer.sent_weekly_email_categorize(user).deliver_now
-    #end
+    User.all.each do |user|
+      Ticket.add_tickets(user)
+      ReportMailer.sent_weekly_email_categorize(user).deliver_now
+    end
   end
 end
