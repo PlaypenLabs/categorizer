@@ -6,18 +6,17 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  root 'home#index'
-
-  resources :home do
-  end
+  root 'users#profile'
 
   resources :users do
     collection do
-      get :profile
+      get :profile, path: '/categorize'
       get 'get_ticket_by_id/:id', action: :get_ticket_by_id
       get 'get_tickets', action: :get_tickets
       post 'recive_category', action: :recive_category
       post 'receive_report', action: :receive_report
+      get 'report_confirmation', action: :report_confirmation
+      get 'welcome_categorization', action: :welcome_categorization
       resources :categories do
       end
       resources :actions, as: :action_messages do
@@ -27,6 +26,4 @@ Rails.application.routes.draw do
   end
   resources :reports do
   end
-
-  get 'welcome' => 'home#welcome'
 end

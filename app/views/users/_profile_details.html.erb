@@ -1,0 +1,15 @@
+<div class="container">
+  <div><%= get_initial_text %></div>
+  <p class="profile-email">You is
+    <b><%= current_user.email %></b>
+    <br/>
+  </p>
+  <p class="profile-name">You Zendesk email:
+    <b><%= current_user.zendesk_email %></b>
+  </p>
+  <div class="row ticket">
+  </div>
+  <div class='row text-right'>
+    <%= link_to 'Show Reports', reports_path, class: 'btn btn-default' if show_report_btn?(@unsent_emails, @uncategorized_tickets) %>
+  </div>
+</div>

@@ -3,7 +3,8 @@ class ActionsController < ApplicationController
   before_action :set_action, only: [:edit, :update, :destroy]
 
   def index
-    @a = current_user.action_messages
+    session[:welcome_categorization] = false
+    @actions = current_user.action_messages
   end
 
   def new
@@ -13,7 +14,7 @@ class ActionsController < ApplicationController
   def create
     @action = current_user.action_messages.new(action_message_params_permit)
     if @action.save
-      redirect_to action_messages_path, notice: 'Action was successfully created.'
+      redirect_to redirect_path, notice: 'Action was successfully created.'
     else
       flash[:error] = @action.errors.full_messages.join
       render :new
@@ -25,7 +26,7 @@ class ActionsController < ApplicationController
 
   def update
     if @action.update(action_message_params_permit)
-      redirect_to action_messages_path, notice: 'Action was successfully updated.'
+      redirect_to redirect_path, notice: 'Action was successfully updated.'
     else
       flash[:error] = @action.errors.full_messages.join
       render :edit
@@ -39,7 +40,7 @@ class ActionsController < ApplicationController
       flash[:notice] = 'Action was successfully deleted.'
       @action.destroy
     end
-    redirect_to action_messages_path
+    redirect_to redirect_path
   end
 
   def actions_report
@@ -57,4 +58,7 @@ class ActionsController < ApplicationController
     @action = ActionMessage.find(params[:id])
   end
 
+  def redirect_path
+    session[:welcome_categorization] == true ? welcome_categorization_users_path : action_messages_path
+  end
 end

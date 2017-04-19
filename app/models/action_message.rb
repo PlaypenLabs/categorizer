@@ -1,4 +1,5 @@
 class ActionMessage < ActiveRecord::Base
+  DEFAULT_ACTIONS = ['Product improvement', 'Help content improvement', 'Support process improvement']
   belongs_to :user
   has_many :reports, foreign_key: :action_id
   has_many :tickets
@@ -12,7 +13,7 @@ class ActionMessage < ActiveRecord::Base
   after_save :update_acess_token
 
   def self.send_weekly_report(user)
-    user.action_messages.with_report.with_recipient.each{ |action| ReportMailer.sent_weekly_email_report(action.recipient, action.access_token).deliver_now }
+    user.action_messages.with_report.with_recipient.each{ |action| ReportMailer.sent_weekly_email_report(action.recipient, action.access_token).deliver_now if action.reports.latest.present? }
   end
 
   private

@@ -1,21 +1,11 @@
-<div class="container">
-  <div><%= get_initial_text %></div>
-  <p class="profile-email">You is
-    <b><%= current_user.email %></b>
-    <br/>
-  </p>
-  <p class="profile-name">You Zendesk email:
-    <b><%= current_user.zendesk_email %></b>
-  </p>
-  <div class="row ticket">
-  </div>
-  <div class="row text-right">
-    <button class="btn btn-danger" onclick="getTickets()">Get Ticket from Zendesk and Save to DB!</button>
-    <%= link_to 'Show Reports', reports_path, class:"btn btn-default" %>
-    <div class="margin-top">
-      <button class="btn btn-success" onclick="prev()">Previous</button>
-      <button class="btn btn-success" onclick="next()">Next</button>
+<% if needs_categorization?(@unsent_emails, @uncategorized_tickets) %>
+  <%= render 'profile_details' %>
+<% else %>
+  <div class='welcome_container'>
+    <div>
+      <b>Nothing to analyze yet</b>
     </div>
+    <p></p>
+    <div>We will let you know when the next batch of emails are ready to for analysis.</div>
   </div>
-
-</div>
+<% end %>
